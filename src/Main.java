@@ -10,7 +10,7 @@ public class Main {
 
        out.println(U1.getNome());
 
-       Biblioteca B1 = new Biblioteca("Bibi");
+       Biblioteca B1 = new Biblioteca("Biblioteca");
 
        out.println(B1.getNome());
    }
