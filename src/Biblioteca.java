@@ -1,42 +1,59 @@
 import java.util.*;
 
 public class Biblioteca {
-    private String Nome;
-    private List<Livro> Livros;
-    private List<Usuario> Usuarios;
+    private String nome;
+    private List<Livro> livros;
+    private List<Usuario> usuarios;
+    private Integer id_livro;
+    private Integer id_user;
 
     //private Integer Qtd;
     //private Boolean Disponivel;
     //private Integer Id;
     //private List<Livro> Emprestimos;
 
+    public Usuario addUsuario(Usuario user){
+        usuarios.add(user);
+        user.setId(id_user++);
+        return user;
+    }
+
     public Biblioteca(String nome) {
-        Livros = new ArrayList<>();
-        Usuarios = new ArrayList<>();
-        Nome = nome;
+        livros = new ArrayList<>();
+        usuarios = new ArrayList<>();
+        this.nome = nome;
+        id_user = 0;
+        id_livro = 0;
     }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public void setNome(String nome) {
-        Nome = nome;
+        this.nome = nome;
     }
 
     public List<Livro> getLivros() {
-        return Livros;
+        return livros;
     }
 
     public void setLivros(List<Livro> livros) {
-        Livros = livros;
+        this.livros = livros;
     }
 
     public List<Usuario> getUsuarios() {
-        return Usuarios;
+        return usuarios;
     }
 
     public void setUsuarios(List<Usuario> usuarios) {
-        Usuarios = usuarios;
+        this.usuarios = usuarios;
     }
+
+    public void addLivro(Livro livro){
+        livros.add(livro);
+    }
+
+    //Ideia cada copia de livro tem um indentificador assim, esses livros através de hash são achados pelo identificador, se pode também saber exatamente a copia que o usuário possui
+    //Ideia dois os livros ficam guardados na biblioteca numa espécie de coleção e possívelmente hash assim nessa coleção set podemos guardar o
 }

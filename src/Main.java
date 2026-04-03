@@ -10,8 +10,12 @@ public class Main {
 
        out.println(U1.getNome());
 
-       Biblioteca B1 = new Biblioteca("Biblioteca");
+       Biblioteca B1 = new Biblioteca("Biblio");
 
        out.println(B1.getNome());
+
+       out.println(B1.addUsuario(U1).getNome());
+
+
    }
 }

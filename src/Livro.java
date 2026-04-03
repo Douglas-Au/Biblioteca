@@ -2,7 +2,15 @@ public class Livro {
     private String Nome;
     private String Autor;
     private String Edicao;
+    private Integer id;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Livro(String nome, String autor, String edicao) {
         Nome = nome;
