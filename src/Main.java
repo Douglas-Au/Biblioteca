@@ -1,21 +1,51 @@
+import java.util.List;
+
 import static java.lang.System.out;
 
 public class Main {
+    public static void MostrarUsuarios(List<Usuario> usuarios){
+        out.print("Usuarios \t Id\n");
+        for(Usuario u: usuarios){
+            out.printf("%s \t %d\n", u.getNome(), u.getId());
+        }
+    }
+    public static void MostrarLivros(List<Usuario> usuarios) {
+        out.print("Usuarios \t Id");
+        for (Usuario u : usuarios) {
+            out.printf("%s \t %d\n", u.getNome(), u.getId());
+        }
+    }
+    public static void MostrarRegistros(List<Usuario> usuarios){
+        out.print("Usuarios \t Id");
+        for(Usuario u: usuarios){
+            out.printf("%s \t %d\n", u.getNome(), u.getId());
+        }
+    }
    public static void main(String[] args) {
+       Biblioteca B = new Biblioteca("LeLivros");
+       out.println(B.getNome());
 
-       Livro l1 = new Livro("Livro", "Eu", "33");
-       out.println(l1.getNome() + " " + l1.getEdicao() + " " + l1.getAutor());
+       B.Acervo();
 
-       Usuario U1 = new Usuario("Nome");
+       for(Usuario u: B.getUsuarios()){
+           out.printf("Nome: %s \t id: %d \n", u.getNome(), u.getId());
+       }
 
-       out.println(U1.getNome());
+       Livro l1 = new Livro("Caminho das indias", "Silvio Santos", "67");
 
-       Biblioteca B1 = new Biblioteca("Biblio");
+       out.printf("Nome do Livro: %s \t Nome do Autor: %s \t Edição: %s \n",l1.getNome(),l1.getAutor(),l1.getEdicao());
 
-       out.println(B1.getNome());
+       Usuario user = new Usuario("Douglas");
 
-       out.println(B1.addUsuario(U1).getNome());
+       out.println(user.getNome());
 
+       B.addUsuario(user);
+
+       B.addLivro(l1);
+
+       B.Acervo();
+
+       MostrarUsuarios(B.getUsuarios());
 
 
    }

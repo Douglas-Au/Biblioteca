@@ -59,6 +59,4 @@ public class Biblioteca {
         }
     }
 
-    //Ideia cada copia de livro tem um indentificador assim, esses livros através de hash são achados pelo identificador, se pode também saber exatamente a copia que o usuário possui
-    //Ideia dois os livros ficam guardados na biblioteca numa espécie de coleção e possívelmente hash assim nessa coleção set podemos guardar o
 }

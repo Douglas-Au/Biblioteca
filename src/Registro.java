@@ -1,31 +1,31 @@
 import java.time.LocalDateTime;
 
 public class Registro {
-        private Livro registro_livro;
-        private Usuario registro_usuario;
+        private Integer registro_livro;
+        private Integer registro_usuario;
         private LocalDateTime data;
         private Integer id_registro;
 
         public Registro(Livro livro, Usuario user, Integer id_registro){
-            registro_livro = livro;
-            registro_usuario = user;
+            registro_livro = livro.getId();
+            registro_usuario = user.getId();
             data = LocalDateTime.now();
             this.id_registro = id_registro;
         }
 
-        public Livro getRegistro_livro() {
+        public Integer getRegistro_livro() {
             return registro_livro;
         }
 
-        public void setRegistro_livro(Livro registro_livro) {
+        public void setRegistro_livro(Integer registro_livro) {
             this.registro_livro = registro_livro;
         }
 
-        public Usuario getRegistro_usuario() {
+        public Integer getRegistro_usuario() {
             return registro_usuario;
         }
 
-        public void setRegistro_usuario(Usuario registro_usuario) {
+        public void setRegistro_usuario(Integer registro_usuario) {
             this.registro_usuario = registro_usuario;
         }
 
