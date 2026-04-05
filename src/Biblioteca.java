@@ -4,6 +4,8 @@ import java.time.*;
 public class Biblioteca {
     private String nome;
     private List<Livro> acervo;
+    private HashMap<Integer, Livro> livros;
+    private HashMap<Integer, Usuario> pessoas;
     private List<Usuario> usuarios;
     private List<Registro> registros;
     private Integer id_livro;
@@ -13,12 +15,14 @@ public class Biblioteca {
     public Usuario addUsuario(Usuario user){
         usuarios.add(user);
         user.setId(id_user++);
+        pessoas.put(user.getId(), user);
         return user;
     }
 
     public Livro addLivro(Livro livro){
         acervo.add(livro);
         livro.setId(id_livro++);
+        livros.put(livro.getId(), livro);
         return livro;
     }
 
@@ -30,6 +34,8 @@ public class Biblioteca {
         id_user = 0;
         id_livro = 0;
         id_rgistro = 0;
+        livros = new HashMap<>();
+        pessoas = new HashMap<>();
     }
 
     public String getNome() {
@@ -82,6 +88,7 @@ public class Biblioteca {
         Livro escolhido = null;
         if(!usuarios.contains(user)){
             System.out.println("Usuario não cadastrado no sistema");
+            return false;
         }
         for(Livro livro: acervo){
             if(livro.getNome().equals(nome_livro) && livro.getDisponivel()) {
@@ -100,16 +107,20 @@ public class Biblioteca {
         return true;
     }
 
-    public void Devolucao(Usuario user){
+    public boolean Devolucao(Usuario user){
         Livro livro = null;
         for(Registro re: registros){
-            if( re.getRegistro_usuario().equals(user.getId()) )
+            if( re.getRegistro_usuario().equals(user.getId()) ){
+                livro = livros.get(re.getRegistro_livro());
+                livro.setDisponivel(true);
+                registros.remove(re);
+                System.out.println("Livro devolvido com sucesso");
+                livro.setDisponivel(true);
+                return true;
+            }
         }
-        registros.removeIf(
-                re -> Objects.equals(re.getRegistro_usuario(),
-                user.getId())
-        );
-        livro.setDisponivel(true);
+        System.out.println("Usuário não encontrado");
+        return false;
     }
 
     public Boolean Renovar_emprestimo(Usuario user){
