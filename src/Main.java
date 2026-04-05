@@ -40,12 +40,39 @@ public class Main {
        out.println(user.getNome());
 
        B.addUsuario(user);
+       B.addUsuario(new Usuario("Pedro"));
+       B.addUsuario(new Usuario("Paulo"));
+       B.addUsuario(new Usuario("A"));
+       B.addUsuario(new Usuario("B"));
+       B.addUsuario(new Usuario("C"));
+       B.addUsuario(new Usuario("D"));
+       B.addUsuario(new Usuario("D"));
 
        B.addLivro(l1);
+       B.addLivro(new Livro("1984", "George Owell", "13"));
+       B.addLivro(new Livro("1984", "George Owell", "12"));
+       B.addLivro(new Livro("1984", "George Owell", "11"));
+       B.addLivro(new Livro("1984", "George Owell", "11"));
+       B.addLivro(new Livro("Revolução dos Bixos", "George Owell", "11"));
+       B.addLivro(new Livro("Revolução dos Bixos", "George Owell", "12"));
+       B.addLivro(new Livro("Revolução dos Bixos", "George Owell", "13"));
+       B.addLivro(new Livro("Revolução dos Bixos", "George Owell", "14"));
+       B.addLivro(new Livro("Triste Fim de Policarpo Quaresma", "Lima Barreto", "1"));
+       B.addLivro(new Livro("Triste Fim de Policarpo Quaresma", "Lima Barreto", "2"));
+       B.addLivro(new Livro("Triste Fim de Policarpo Quaresma", "Lima Barreto", "3"));
+
 
        B.Acervo();
 
        MostrarUsuarios(B.getUsuarios());
+
+       B.Consulta("1984");
+
+       B.Alugar("1984", user);
+
+       B.Consulta("1984");
+
+
 
 
    }

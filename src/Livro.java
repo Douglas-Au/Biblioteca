@@ -46,4 +46,12 @@ public class Livro {
     public void setNome(String nome) {
         Nome = nome;
     }
+
+    public Boolean getDisponivel() {
+        return disponivel;
+    }
+
+    public void setDisponivel(Boolean disponivel) {
+        this.disponivel = disponivel;
+    }
 }
