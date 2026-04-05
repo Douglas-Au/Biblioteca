@@ -92,8 +92,15 @@ public class Biblioteca {
         }
         registros.add(new Registro(escolhido,user,id_rgistro++));
         escolhido.setDisponivel(false);
-        System.out.println("vc tem até 10 dias para rtornar o livro");
+        System.out.println("vc tem até 10 dias para retornar o livro");
+    }
 
+    public void Devolucao(Livro livro, Usuario user){
+        registros.removeIf(
+                re -> Objects.equals(re.getRegistro_livro(),
+                livro.getId()) && Objects.equals(re.getRegistro_usuario(), user.getId())
+        );
+        livro.setDisponivel(true);
     }
 
 }
