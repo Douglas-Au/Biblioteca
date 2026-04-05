@@ -1,14 +1,14 @@
 import java.util.*;
-import java.time.LocalDateTime;
+import java.time.*;
 
 public class Biblioteca {
     private String nome;
-    private List<Livro> livros;
+    private List<Livro> acervo;
     private List<Usuario> usuarios;
+    private List<Registro> registros;
     private Integer id_livro;
     private Integer id_user;
     private Integer id_rgistro;
-    private List<Registro> registros;
 
     public Usuario addUsuario(Usuario user){
         usuarios.add(user);
@@ -17,13 +17,13 @@ public class Biblioteca {
     }
 
     public Livro addLivro(Livro livro){
-        livros.add(livro);
+        acervo.add(livro);
         livro.setId(id_livro++);
         return livro;
     }
 
     public Biblioteca(String nome) {
-        livros = new ArrayList<>();
+        acervo = new ArrayList<>();
         usuarios = new ArrayList<>();
         registros = new ArrayList<>();
         this.nome = nome;
@@ -40,12 +40,12 @@ public class Biblioteca {
         this.nome = nome;
     }
 
-    public List<Livro> getLivros() {
-        return livros;
+    public List<Livro> getacervo() {
+        return acervo;
     }
 
-    public void setLivros(List<Livro> livros) {
-        this.livros = livros;
+    public void setacervo(List<Livro> acervo) {
+        this.acervo = acervo;
     }
 
     public List<Usuario> getUsuarios() {
@@ -56,31 +56,34 @@ public class Biblioteca {
         this.usuarios = usuarios;
     }
 
-    private int contLivros(String nome_livro){
+    private int contacervo(String nome_livro){
         int cont = 0;
-        for(Livro l: livros){
+        for(Livro l: acervo){
             cont += (l.getNome().equals(nome_livro) ) ? 1 : 0;
         }
         return cont;
     }
 
     public void Acervo(){
-        for(Livro liv: livros){
+        for(Livro liv: acervo){
             System.out.printf("Titulo: %s \t Autor: %s \t Edição: %s \t id: %d\n",liv.getNome(),liv.getAutor(),liv.getEdicao(),liv.getId());
         }
     }
 
     public void Consulta(String nome_do_livro) {
-        for(Livro l: livros){
+        for(Livro l: acervo){
             if(l.getNome().equals(nome_do_livro)){
                 System.out.println(l.getNome() + " " + l.getAutor() + " " + l.getEdicao() + " " + l.getDisponivel());
             }
         }
     }
 
-    public void Alugar(String nome_livro, Usuario user) {
+    public Boolean Alugar(String nome_livro, Usuario user) {
         Livro escolhido = null;
-        for(Livro livro: livros){
+        if(!usuarios.contains(user)){
+            System.out.println("Usuario não cadastrado no sistema");
+        }
+        for(Livro livro: acervo){
             if(livro.getNome().equals(nome_livro) && livro.getDisponivel()) {
                 escolhido = livro;
                 break;
@@ -88,19 +91,41 @@ public class Biblioteca {
         }
         if(escolhido == null){
             System.out.println("Não há copia disponível deste livro");
-
+            return false;
         }
-        registros.add(new Registro(escolhido,user,id_rgistro++));
+        Registro novo_registro = new Registro(escolhido,user,id_rgistro++);
+        registros.add(novo_registro);
         escolhido.setDisponivel(false);
-        System.out.println("vc tem até 10 dias para retornar o livro");
+        System.out.println("vc tem até " + novo_registro.getPrazo() + " para retornar o livro");
+        return true;
     }
 
-    public void Devolucao(Livro livro, Usuario user){
+    public void Devolucao(Usuario user){
+        Livro livro = null;
+        for(Registro re: registros){
+            if( re.getRegistro_usuario().equals(user.getId()) )
+        }
         registros.removeIf(
-                re -> Objects.equals(re.getRegistro_livro(),
-                livro.getId()) && Objects.equals(re.getRegistro_usuario(), user.getId())
+                re -> Objects.equals(re.getRegistro_usuario(),
+                user.getId())
         );
         livro.setDisponivel(true);
+    }
+
+    public Boolean Renovar_emprestimo(Usuario user){
+        for(Registro reg: registros){
+            if(reg.getRegistro_usuario().equals(user.getId())){
+                if(reg.getRenovado() >= 2){
+                    System.out.println("Não é possível renovar esse emprestimo");
+                    return false;
+                }
+                reg.setPrazo(reg.getPrazo().plusDays(10));
+                reg.setRenovado( reg.getRenovado() + 1);
+                System.out.println("Emprestimo renovado com sucesso, vc tem mate o dia " + reg.getPrazo() + " para retornar o livro");
+                return true;
+            }
+        }
+        return false;
     }
 
 }

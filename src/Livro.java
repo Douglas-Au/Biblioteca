@@ -3,9 +3,7 @@ public class Livro {
     private String Autor;
     private String Edicao;
     private Integer id;
-
     private Boolean disponivel;
-    private Integer id_locatario;
 
     public Integer getId() {
         return id;
@@ -20,7 +18,6 @@ public class Livro {
         Autor = autor;
         Edicao = edicao;
         disponivel = true;
-        id_locatario = null;
     }
 
     public String getEdicao() {

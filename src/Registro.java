@@ -1,16 +1,20 @@
-import java.time.LocalDateTime;
+import java.time.*;
 
 public class Registro {
         private Integer registro_livro;
         private Integer registro_usuario;
-        private LocalDateTime data;
+        private LocalDate data;
         private Integer id_registro;
+        private LocalDate prazo;
+        private int renovado;
 
         public Registro(Livro livro, Usuario user, Integer id_registro){
             registro_livro = livro.getId();
             registro_usuario = user.getId();
-            data = LocalDateTime.now();
+            data = LocalDate.now();
+            prazo = data.plusDays(10);
             this.id_registro = id_registro;
+            renovado = 0;
         }
 
         public Integer getRegistro_livro() {
@@ -29,12 +33,12 @@ public class Registro {
             this.registro_usuario = registro_usuario;
         }
 
-        public LocalDateTime getData() {
+        public LocalDate getData() {
             return data;
         }
 
-        public void setData(LocalDateTime data) {
-            this.data = data;
+        public void setData() {
+            this.data = LocalDate.now();
         }
 
         public Integer getId_registro() {
@@ -43,5 +47,22 @@ public class Registro {
 
         public void setId_registro(Integer id_registro) {
             this.id_registro = id_registro;
+        }
+
+
+        public LocalDate getPrazo() {
+            return prazo;
+        }
+
+        public void setPrazo(LocalDate prazo) {
+            this.prazo = prazo;
+        }
+
+        public int getRenovado() {
+            return renovado;
+        }
+
+        public void setRenovado(int renovado) {
+            this.renovado = renovado;
         }
 }
