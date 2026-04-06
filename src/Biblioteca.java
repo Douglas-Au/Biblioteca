@@ -4,8 +4,6 @@ import java.time.*;
 public class Biblioteca {
     private String nome;
     private List<Livro> acervo;
-    private HashMap<Integer, Livro> livros;
-    private HashMap<Integer, Usuario> pessoas;
     private List<Usuario> usuarios;
     private List<Registro> registros;
     private Integer id_livro;
@@ -15,14 +13,12 @@ public class Biblioteca {
     public Usuario addUsuario(Usuario user){
         usuarios.add(user);
         user.setId(id_user++);
-        pessoas.put(user.getId(), user);
         return user;
     }
 
     public Livro addLivro(Livro livro){
         acervo.add(livro);
         livro.setId(id_livro++);
-        livros.put(livro.getId(), livro);
         return livro;
     }
 
@@ -31,11 +27,7 @@ public class Biblioteca {
         usuarios = new ArrayList<>();
         registros = new ArrayList<>();
         this.nome = nome;
-        id_user = 0;
-        id_livro = 0;
-        id_rgistro = 0;
-        livros = new HashMap<>();
-        pessoas = new HashMap<>();
+        id_user = id_livro = id_rgistro = 0;
     }
 
     public String getNome() {
@@ -72,14 +64,14 @@ public class Biblioteca {
 
     public void Acervo(){
         for(Livro liv: acervo){
-            System.out.printf("Titulo: %s \t Autor: %s \t Edição: %s \t id: %d\n",liv.getNome(),liv.getAutor(),liv.getEdicao(),liv.getId());
+            System.out.printf("Titulo: %s \t Autor: %s \t id: %d\n",liv.getNome(),liv.getAutor(),liv.getId());
         }
     }
 
     public void Consulta(String nome_do_livro) {
         for(Livro l: acervo){
             if(l.getNome().equals(nome_do_livro)){
-                System.out.println(l.getNome() + " " + l.getAutor() + " " + l.getEdicao() + " " + l.getDisponivel());
+                System.out.println(l.getNome() + " " + l.getAutor() + " " + l.getDisponivel());
             }
         }
     }
@@ -107,11 +99,12 @@ public class Biblioteca {
         return true;
     }
 
+
+    //Falta resolver essa função
     public boolean Devolucao(Usuario user){
         Livro livro = null;
         for(Registro re: registros){
             if( re.getRegistro_usuario().equals(user.getId()) ){
-                livro = livros.get(re.getRegistro_livro());
                 livro.setDisponivel(true);
                 registros.remove(re);
                 System.out.println("Livro devolvido com sucesso");

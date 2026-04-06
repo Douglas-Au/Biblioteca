@@ -1,9 +1,11 @@
+import java.util.List;
+
 public class Livro {
     private String Nome;
     private String Autor;
-    private String Edicao;
     private Integer id;
     private Boolean disponivel;
+    private List<Copia> copias;
 
     public Integer getId() {
         return id;
@@ -13,19 +15,10 @@ public class Livro {
         this.id = id;
     }
 
-    public Livro(String nome, String autor, String edicao) {
+    public Livro(String nome, String autor) {
         Nome = nome;
         Autor = autor;
-        Edicao = edicao;
         disponivel = true;
-    }
-
-    public String getEdicao() {
-        return Edicao;
-    }
-
-    public void setEdicao(String edicao) {
-        Edicao = edicao;
     }
 
     public String getAutor() {
